@@ -2,17 +2,7 @@
 
 ## Note link
 
-### Card topic
-
-#### Front
-
-Text on the front...
-line 2
-line 3 $\mathbb R$
-
-line 4
-
-#### Back
+### Card front
 
 Text for the back...
 
@@ -20,23 +10,29 @@ $$ \Psi: V\to W $$
 
 more text for the back
 
-### Card topic 2
+line 2
 
-#### Front
+line 3 $\mathbb R$
 
-Text on the front...
+line 4
 
-#### Back
+don't use headings (`#`) within a card
 
-Text for the back...
+### Card front 2
+
+This is a test image...
+
+![[Pasted image 20221001152628.png]]
+
+And anotha one
+
+![[Pasted image 20221001155141.png]]
 
 ## Note link 2
 
-### Card topic
+### Card front
 
-#### Front
-
-Text on the front...
+Optional additional text on the front...
 
 #### Back
 
