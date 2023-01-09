@@ -3,9 +3,6 @@ import re
 import markdown
 
 
-OUTPUT_DIR_DEFAULT = os.path.expanduser('~/Downloads')
-
-
 def to_html(content: str, image_path=None):
     """Convert from obsidian to html with anki specific formatting"""
     # deal with images
@@ -54,4 +51,3 @@ def to_html(content: str, image_path=None):
         i -= 1
 
     return out, media
-

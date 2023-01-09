@@ -1,35 +1,45 @@
 #!/usr/bin/env python
 
-"""Converts a single file of a specified format (see anki_file_format.md) into cards"""
-
 import os
-import sys
 import genanki
-from utils import to_html, OUTPUT_DIR_DEFAULT
+import argparse
+
+from utils import to_html
 
 def main():
-    # read arguments from the command line
-    #   format: file2cards.py deck_name notes_file [output_dir]
-    if len(sys.argv) < 3 or len(sys.argv) > 5:
-        print('usage: file2cards.py deck_name notes_file [output_dir] [image_path]')
-        exit(1)
-    deck_name = sys.argv[1]
-    notes_file = os.path.expanduser(sys.argv[2])
-    # output_dir
-    if len(sys.argv) > 3:
-        output_dir = os.path.expanduser(sys.argv[3])
-    else:
-        output_dir = OUTPUT_DIR_DEFAULT
-    # image_path
-    if len(sys.argv) > 4:
-        image_path = os.path.expanduser(sys.argv[4])
-    else:
-        image_path = os.path.join(os.path.split(notes_file)[0], 'attachments')
+    """
+    Converts a single file of a specified format (see anki_file_format.md) into cards
+    """
+
+    # parse command line arguments
+    parser = argparse.ArgumentParser(
+            prog='file2cards',
+            description='Converts a single file of a specified format (see anki_file_format.md) into an anki deck')
+    parser.add_argument(
+            'deck_name',
+            type=os.path.abspath,
+            help='name of the created deck')
+    parser.add_argument(
+            'notes_file',
+            type=os.path.abspath,
+            help='path to the notes file')
+    parser.add_argument(
+            '--output_dir',
+            type=os.path.abspath,
+            help='path to the output directory (default: ~/Downloads)',
+            default=os.path.expanduser('~/Downloads'))
+    parser.add_argument(
+            '--image_path',
+            type=os.path.abspath,
+            help='path to the directory of linked images (default: <notes_file>/attachments')
+    args = parser.parse_args()
+    if args.image_path is None:
+        args.image_path = os.path.join(os.path.split(args.notes_file)[0], 'attachments')
 
     # create the deck
     #   in practice setting the deck id to the same thing for all decks seems to
-    #   work, though I'm not sure if this is best practice
-    deck = genanki.Deck(1, deck_name)
+    #   work, though i'm not sure if this is best practice
+    deck = genanki.Deck(1, args.deck_name)
 
     # add notes from file
     n_cards = 0
@@ -38,7 +48,7 @@ def main():
     card_front = ''
     card_buffer = []
     media = []
-    with open(notes_file, 'r') as f:
+    with open(args.notes_file, 'r') as f:
         lines = f.readlines()
         for i, l in enumerate(lines):
             line = l.strip()
@@ -47,7 +57,7 @@ def main():
             if line[:1] == '#' and in_back:
                 card_back = commit_buffer(card_buffer)
                 card_buffer = []
-                media.extend(add_card(deck, card_front, card_back, image_path))
+                media.extend(add_card(deck, card_front, card_back, args.image_path))
                 n_cards += 1
 
                 in_back = False
@@ -96,7 +106,7 @@ def main():
     # close card on eof
     if in_back:
         card_back = commit_buffer(card_buffer)
-        media.extend(add_card(deck, card_front, card_back, image_path))
+        media.extend(add_card(deck, card_front, card_back, args.image_path))
         n_cards += 1
 
     # package with media
@@ -104,9 +114,9 @@ def main():
     package.media_files = media
 
     # write the deck to a file
-    output_file = os.path.join(output_dir, f'{deck_name}.apkg')
+    output_file = os.path.join(args.output_dir, f'{args.deck_name}.apkg')
     package.write_to_file(output_file)
-    print(f'wrote {n_cards} cards to {output_file} from notes file {notes_file}')
+    print(f'wrote {n_cards} cards to {output_file} from notes file {args.notes_file}')
 
     # TODO can this be put directly in the anki files?
 
@@ -134,4 +144,3 @@ def add_card(deck: genanki.Deck, front: str, back: str, image_path=None):
 
 if __name__ == '__main__':
     main()
-
