@@ -1,7 +1,7 @@
 import genanki
 
 
-PREAMBLE_FILE = './mtpreamble.sty'
+PREAMBLE_FILE = '../templates/mtpreamble.sty'
 
 
 def get_mtpreamble_model(preamble_file=PREAMBLE_FILE):
