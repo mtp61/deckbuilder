@@ -1,0 +1,62 @@
+\documentclass[11pt, oneside]{article}
+\usepackage{graphicx,amsmath,amssymb,amsthm,mathrsfs,latexsym,enumitem,extarrows,setspace,xcolor,multicol,wrapfig,framed,soul,multicol}
+
+\usepackage{mtpreamble}
+
+\usepackage[colorlinks = true,
+            linkcolor = blue,
+            urlcolor  = blue,
+            citecolor = blue,
+            anchorcolor = blue]{hyperref}
+
+\theoremstyle{definition}
+\newtheorem{card}{Card}
+
+\begin{document}
+
+    \title{Latex to Anki Template}
+    \author{Matthew Pauly}
+    \date{}
+    \maketitle
+    
+    \tableofcontents
+    \newpage
+
+    \section{The first section}
+
+    \subsection{A subsection}
+
+    \begin{card}
+        This is the front of a card $\mathbb R\to\R$
+        
+        \medskip % this marks the break between the front and the back
+
+        This is the back.
+
+        $$ \bmat{1 & 2 \\ 3 & 4} $$
+
+        With a matrix!
+    \end{card}
+
+    \subsection{Another subsection}
+
+    \begin{card}
+        This is the front of a second card.
+        
+        The front of the card can also have multiple lines.
+
+        \[
+            \C,
+            \R,
+            \mathbb Q
+        \]
+
+        And math!
+
+        \medskip % this marks the break between the front and the back
+
+        This is the back.
+
+    \end{card}
+
+\end{document}

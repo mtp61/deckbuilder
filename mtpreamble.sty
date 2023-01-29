@@ -1,0 +1,47 @@
+\ProvidesPackage{mtpreamble}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{xfrac}
+
+% linear algebrea
+\newcommand{\R}{\mathbb R}
+\newcommand{\Rn}{\R^n}
+\newcommand{\Rnn}{\R^{n\times n}}
+\newcommand{\Rmm}{\R^{m\times m}}
+\newcommand{\Rmn}{\R^{m\times n}}
+\newcommand{\Rnm}{\R^{n\times m}}
+
+\newcommand{\tr}{\mathrm{tr}}
+\newcommand{\rk}{\mathrm{rk}}
+\newcommand{\im}{\mathrm{Im}}
+
+% complex analysis
+\newcommand{\C}{\mathbb C}
+
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\norm}[1]{\left\|#1\right\|}
+
+\newcommand{\re}{\mathrm{Re}}
+
+% https://tex.stackexchange.com/questions/75101/most-useful-latex-macros-help-me-to-understand-a-statement-with-psfrac
+\newcommand{\pa}[1]{\left(#1\right)} % encloses the argument using stretchable parentheses
+\newcommand{\bra}[1]{\left[#1\right]} % encloses the argument using stretchable square brackets
+\newcommand{\curl}[1]{\left\{#1\right\}} % encloses the argument using stretchable curly braces
+
+% matrices for displayed expressions
+\newcommand{\mat}[1]{\begin{matrix}#1\end{matrix}} % no delimiters
+\newcommand{\pmat}[1]{\pa{\mat{#1}}} % parentheses as delimiters
+\newcommand{\bmat}[1]{\bra{\mat{#1}}} % square brackets as delimiters
+
+% variations of \frac and \sfrac
+\newcommand{\pfrac}[2]{\pa{\frac{#1}{#2}}} % enclosed in parentheses
+\newcommand{\bfrac}[2]{\bra{\frac{#1}{#2}}} % enclosed in square brackets
+\newcommand{\psfrac}[2]{\pa{\sfrac{#1}{#2}}} % sfrac enclosed in parentheses
+\newcommand{\bsfrac}[2]{\bra{\sfrac{#1}{#2}}} % sfrac enclosed in square brackets
+
+% for small matrices to be used in in-line expressions
+\newcommand{\sm}[1]{\begin{smallmatrix}#1\end{smallmatrix}} % no delimiters
+\newcommand{\psm}[1]{\pa{\sm{#1}}} % parentheses as delimiters
+\newcommand{\bsm}[1]{\bra{\sm{#1}}} % square brackets as delimiters
+
