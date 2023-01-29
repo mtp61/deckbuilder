@@ -3,9 +3,7 @@
 import os
 import genanki
 
-from utils import commit_buffer, add_card
-from anki_parser import get_args
-from mtpreamble_model import get_mtpreamble_model
+from utils import commit_buffer, add_card, get_args, get_mtpreamble_model
 
 
 LINE_BEGIN = '\\begin{card}'
